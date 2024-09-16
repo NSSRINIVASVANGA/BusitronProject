@@ -1,0 +1,32 @@
+.btn {
+  background-color: blue;
+  color: white;
+  font-family: 'Roboto';
+  padding: 10px;
+  border: 0px;
+  border-radius: 10px;
+  outline: none;
+}
+
+.input-el {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.dashbord-con {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+}
+
+.mny-con {
+  max-height: 40vh;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
