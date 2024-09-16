@@ -1,97 +1,39 @@
-import Cookies from 'js-cookie'
-import {Redirect} from 'react-router-dom'
 import {Component} from 'react'
 import './index.css'
 
-class Login extends Component {
-  state = {username: '', password: '', showError: false, errMsg: ''}
+class Dashbord extends Component {
+  state = {accountbalance: 0, getMoney: 0}
 
-  onSuccess = data => {
-    const {history} = this.props
-    Cookies.set('jwt_token', data.jwt_token, {expires: 30})
-    history.replace('/dashbord')
+  changeMoney = event => {
+    this.setState({getMoney: event.target.value})
   }
 
-  onFailure = data => {
-    this.setState({showError: true, errMsg: data.error_msg})
-  }
-
-  formSubmit = async event => {
-    event.preventDefault()
-    const {username, password} = this.state
-    const url = ''
-    const details = {
-      username,
-      password,
-    }
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(details),
-    }
-    const response = await fetch(url, options)
-    const data = await response.json()
-    if (response.ok === true) {
-      this.onSuccess(data)
-    } else {
-      this.onFailure(data)
-    }
-  }
-
-  usernameChange = event => {
-    this.setState({username: event.target.value})
-  }
-
-  passwordChange = event => {
-    this.setState({password: event.target.value})
+  changeBalance = () => {
+    const {accountbalance, getMoney} = this.state
+    accountbalance -= parseInt(getMoney)
+    this.setState({accountbalance: accountbalance})
   }
 
   render() {
-    const {showError, errMsg} = this.state
-    if (Cookies.get('jwt_token') !== undefined) {
-      return <Redirect to="/login" />
-    }
+    const {accountbalance} = this.state
     return (
-      <div className="login-container">
-        <div className="form-container">
-          <form onSubmit={this.formSubmit}>
-            <div className="input-con">
-              <label htmlFor="username" className="label-el">
-                {' '}
-                USERNAME{' '}
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="input-el"
-                placeholder="Username"
-                onChange={this.usernameChange}
-              />
-            </div>
-            <div className="input-con">
-              <label htmlFor="password" className="label-el">
-                {' '}
-                PASSWORD{' '}
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="input-el"
-                placeholder="Password"
-                onChange={this.passwordChange}
-              />
-            </div>
-            <div className="input-con">
-              <button type="submit" className="button">
-                {' '}
-                Login{' '}
-              </button>
-              {showError && <p className="err-msg"> Enter Valid Details </p>}
-            </div>
-          </form>
+      <div className="dashbord-con">
+        <div className="mny-con">
+          <h1 className="heading"> Current Balance : {accountbalance} </h1>
+          <input
+            type="text"
+            onChange={this.changeMoney}
+            placeholder="Enter Amount"
+            className="input-el"
+          />
+          <button onClick={this.changeBalance} className="btn">
+            {' '}
+            Deposit{' '}
+          </button>
         </div>
       </div>
     )
   }
 }
 
-export default Login
+export default Dashbord
