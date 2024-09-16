@@ -1,15 +1,15 @@
-import { useState,ReactRouter } from 'react'
-import './App.css'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Login from './components/Login'
-//import Dashbord from './components/Dashbord'
+import Dashbord from './components/Dashbord'
+import './App.css'
 
-function App() {
-
-  return (
-    <ReactRouter>
-    <Route exact path = "/login" component = {Login}/>
-    </ReactRouter>
-  )
-}
+const App = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/dashbord" component={Dashbord} />
+      <Route exact path="/login" component={Login} />
+    </Switch>
+  </BrowserRouter>
+)
 
 export default App
