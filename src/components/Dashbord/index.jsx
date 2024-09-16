@@ -15,13 +15,14 @@ class Dashbord extends Component {
   }
 
   render() {
-    const {accountbalance} = this.state
+    const {accountbalance,getMoney} = this.state
     return (
       <div className="dashbord-con">
         <div className="mny-con">
           <h1 className="heading"> Current Balance : {accountbalance} </h1>
           <input
             type="text"
+            value = {getmoney}
             onChange={this.changeMoney}
             placeholder="Enter Amount"
             className="input-el"
